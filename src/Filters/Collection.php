@@ -18,7 +18,7 @@ class Collection
         $connectionName = Media::getConnectionResolver()->getDefaultConnection();
         $isProperSql = in_array($connectionName, ['mysql', 'pgsql', 'sqlite']);
 
-        $queryWhere = $isProperSql ? 'LOWER(collection_name)' : 'collection_name';
+        $queryWhere =  'tg_mediable_id';
         $queryValue = $isProperSql ? mb_strtolower($collectionName) : $collectionName;
 
         return $next($query)->where(DB::raw($queryWhere), '=', $queryValue);
