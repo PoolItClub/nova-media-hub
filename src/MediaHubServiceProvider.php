@@ -21,7 +21,7 @@ class MediaHubServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslations(__DIR__ . '/../lang', 'nova-media-hub', true);
 
         if ($this->app->runningInConsole()) {
