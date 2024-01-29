@@ -16,7 +16,7 @@ class MediaHubController extends Controller
     {
         $defaultCollections = MediaHub::getDefaultCollections();
 
-        $collections = MediaHub::getMediaModel()::pluck('collection_name')
+        $collections = MediaHub::getMediaModel()::pluck('tg_mediable_id')
             ->merge($defaultCollections)
             ->map(fn ($name) => str($name)->ucfirst())
             ->unique()
@@ -97,6 +97,9 @@ class MediaHubController extends Controller
 
     public function moveMediaToCollection(Request $request)
     {
+        return response()->json([
+            'success_count' => $updatedCount,
+        ], 200);
         $collectionName = $request->get('collection');
         $mediaIds = $request->get('mediaIds');
         if (!$collectionName) return response()->json(['error' => 'Collection name required.'], 400);
@@ -113,6 +116,7 @@ class MediaHubController extends Controller
 
     public function moveMediaItemToCollection(Request $request, $mediaId)
     {
+        return response()->json($media, 200);
         $collectionName = $request->get('collection');
         if (!$collectionName) return response()->json(['error' => 'Collection name required.'], 400);
 
